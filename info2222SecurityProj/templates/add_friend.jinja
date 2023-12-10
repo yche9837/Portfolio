@@ -1,0 +1,58 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+<style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    #message_box {
+        border: 1px solid black; 
+        height: 400px; 
+        width: 800px; 
+        overflow: auto;
+        padding: 2px;
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .content-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .content-flex > div {
+        width: 45%; /* Adjust this value based on your needs */
+    }
+</style>
+
+<script>
+    async function add_friend() {
+        let addFriendURL = "{{ url_for('add_friend_user') }}";
+        let res = await axios.post(addFriendURL, {
+            friend_username: $("#friend_username").val()
+        });
+        if (res.data.startsWith("Error:")) {
+            alert(res.data);
+            return;
+        }
+        window.location.href = res.data;
+    }
+</script>
+
+{% include 'heading.jinja' %}
+<h1>Add Friends</h1>
+
+<div class="content-flex">
+    <div>
+        <p>Enter your friend's username:</p>
+        <input id="friend_username"/>
+        <button onclick="add_friend()">Confirm</button>
+    </div>
+</div>
+
+{% endblock %}

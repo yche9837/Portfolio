@@ -1,0 +1,78 @@
+{% extends 'base.jinja' %}
+
+{% block content %}
+   <style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    br {
+        display: block;
+        content: "";
+        margin: 10px 0;
+    }
+    </style>
+
+    <!-- <script src="/static/js/libs/socket.io.min.js"></script> -->
+    <script>
+
+        let username = "{{ username }}";
+
+        Cookies.set('username', username);
+
+        function isValidURL(string) {
+            if (string.length == 0) {
+                return false;
+            }
+            if (string[0] == "/") {
+                return true;
+            }
+            return false;
+        }
+
+        async function make_post() {
+            let postURL = "{{ url_for('new_post_user') }}";
+            let res = await axios.post(postURL, {
+                username: username,
+                title: $("#title").val(),
+                content: $("#content").val(),
+                category: $("#category").val()
+            });
+            if (!isValidURL(res.data)) {
+                alert(res.data);
+                return;
+            }
+            window.open(res.data, "_self")
+        }
+
+    </script>
+
+{% include 'heading.jinja' %}
+
+<h1>Create a new post</h1>
+
+    <div id="post_box">
+        <p class="text"><strong>Please enter details for your post: </strong><br>
+            <input id="title" placeholder="Title" size=40 maxlength=150><br>
+            <label> Select Category
+            <select name="categories" id="category">
+                <option value="" disabled selected hidden>Please Choose...</option>
+                {% for category in categories %}
+                    <option value={{ category.name }}>{{ category.name }}</option>
+                {% endfor %}
+            </select></label><br>
+        </p><br>
+        <textarea id="content" placeholder="Text" rows="20" cols="80"></textarea>
+        <button onclick="make_post()">Post</button>
+    </div>
+
+
+    
+
+{% endblock %}

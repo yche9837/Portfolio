@@ -1,0 +1,79 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+<style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .content-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .content-flex > div {
+        width: 45%; /* Adjust this value based on your needs */
+    }
+</style>
+
+<script>
+    async function add_category() {
+        let addURL = "{{ url_for('add_category') }}";
+        let res = await axios.post(addURL, {
+            target_category: $("#added").val()
+        });
+        if (res.data.startsWith("Error:")) {
+            alert(res.data);
+            return;
+        }
+        window.location.href = res.data;
+    }
+
+    async function delete_category() {
+        let deleteURL = "{{ url_for('delete_category') }}";
+        let res = await axios.post(deleteURL, {
+            target_category: $("#deleted").val()
+        });
+        if (res.data.startsWith("Error:")) {
+            alert(res.data);
+            return;
+        }
+        window.location.href = res.data;
+    }
+</script>
+
+{% include 'heading.jinja' %}
+<h1>Categories</h1>
+
+<div class="content-flex">
+    <div>
+        <h2>All categories</h2>
+        <ul>
+        {% for category in categories %}
+            <p>{{ category.name }}</p>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Add a new category</h2>
+        <p>Type the name of the category to be added:</p>
+        <input id="added"/>
+        <button onclick="add_category()">Confirm</button>
+    </div>
+
+    <div>
+        <h2>Delete a category</h2>
+        <p>Type the name of the category to be deleted:</p>
+        <input id="deleted"/>
+        <button onclick="delete_category()">Confirm</button>
+    </div>
+</div>
+
+{% endblock %}

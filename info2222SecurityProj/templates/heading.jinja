@@ -1,0 +1,17 @@
+<nav style="border-bottom: 1px solid black;">
+    <ol style="float: right">
+        <li style="display:inline-block">Username:  {{ username }} </li>
+        <li style="display:inline-block"><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ol>
+
+    <ol style="float: left">
+        <li style="display:inline-block;margin-right: 20px;"><a href="{{ url_for('friends', username=username)}}">Friends</a></li>
+        <li style="display:inline-block;margin-right: 20px;"><a href="{{ url_for('add_friend', username=username)}}">Add Friends</a></li>
+        <li style="display:inline-block;margin-right: 20px;"><a href="{{ url_for('discussion', username=username)}}">Discussion</a></li>
+        {% if is_admin %}
+            <li style="display:inline-block;margin-right: 20px;"><a href="{{ url_for('mute', username=username)}}">Mute</a></li>
+            <li style="display:inline-block;margin-right: 20px;"><a href="{{ url_for('remove_post', username=username)}}">Remove Posts</a></li>
+            <li style="display:inline-block"><a href="{{ url_for('categories') }}">Adjust Categories</a></li>
+        {% endif %}
+    </ol>
+</nav>

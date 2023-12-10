@@ -1,0 +1,68 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+<style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    #message_box {
+        border: 1px solid black; 
+        height: 400px; 
+        width: 800px; 
+        overflow: auto;
+        padding: 2px;
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .content-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .content-flex > div {
+        width: 45%; /* Adjust this value based on your needs */
+    }
+</style>
+
+<script>
+    async function mute() {
+        let muteURL = "{{ url_for('mute_user') }}";
+        let res = await axios.post(muteURL, {
+            target_username: $("#username").val()
+        });
+        if (res.data.startsWith("Error:")) {
+            alert(res.data);
+            return;
+        }
+        window.location.href = res.data;
+    }
+</script>
+
+{% include 'heading.jinja' %}
+<h1>Mute</h1>
+
+<div class="content-flex">
+    <div>
+        <h2>All Users</h2>
+        <ul>
+        {% for user in all_users %}
+            <li>{{ user.username }}: {{ "Muted" if user.is_muted else "Not muted" }}</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>User Mute Control</h2>
+        <p>Type username to change mute status:</p>
+        <input id="username"/>
+        <button onclick="mute()">Confirm</button>
+    </div>
+</div>
+
+{% endblock %}

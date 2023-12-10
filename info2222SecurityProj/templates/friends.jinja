@@ -1,0 +1,37 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+<style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    #message_box {
+        border: 1px solid black; 
+        height: 400px; 
+        width: 800px; 
+        overflow: auto;
+        padding: 2px;
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+</style>
+
+{% include 'heading.jinja' %}
+
+<h1>Friends</h1>
+<ul>
+{% for friend in friends %}
+    <li>
+        <a href="{{ url_for('message', username=username, friend_username=friend.friend_username) }}">
+            {{ friend.friend_username }}
+        </a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

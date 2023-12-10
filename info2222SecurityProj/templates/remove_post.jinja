@@ -1,0 +1,68 @@
+{% extends 'base.jinja' %}
+
+{% block content %} 
+<style>
+    nav {
+        border-bottom: 1px solid black;
+        overflow: auto
+    }
+
+    #message_box {
+        border: 1px solid black; 
+        height: 400px; 
+        width: 800px; 
+        overflow: auto;
+        padding: 2px;
+    }
+
+    .text  {
+        margin-top: 2px;
+        margin-bottom: 2px;
+    }
+
+    .content-flex {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .content-flex > div {
+        width: 45%; /* Adjust this value based on your needs */
+    }
+</style>
+
+<script>
+    async function remove() {
+        let removeURL = "{{ url_for('remove_post_user') }}";
+        let res = await axios.post(removeURL, {
+            target_id: $("#post_id").val()
+        });
+        if (res.data.startsWith("Error:")) {
+            alert(res.data);
+            return;
+        }
+        window.location.href = res.data;
+    }
+</script>
+
+{% include 'heading.jinja' %}
+<h1>Remove Post</h1>
+
+<div class="content-flex">
+    <div>
+        <h2>All Posts</h2>
+        <ul>
+        {% for post in posts %}
+            <li><strong>ID: </strong>{{ post.id }} <strong>Title: </strong>{{ post.title }} <strong>Author: </strong>{{post.username}}</li>
+        {% endfor %}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Post Control</h2>
+        <p> Type the post id to remove post:</p>
+        <input id="post_id"/>
+        <button onclick="remove()">Confirm</button>
+    </div>
+</div>
+
+{% endblock %}
