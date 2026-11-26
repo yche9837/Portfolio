@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# Secrets and local data
+*.key
+*.pem
+*.srl
+*.csr
+*.crt
+Credentials.json
+config.ini
+*.db
+
+# OS
+.DS_Store
