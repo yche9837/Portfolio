@@ -12,7 +12,7 @@ fionachen0811@gmail.com · [Portfolio site](https://yche9837.github.io/fiona-ds-
 
 | Project | What it shows | Tools | Result |
 |---|---|---|---|
-| Hotel Booking Cancellation Prediction (2026) | End-to-end, leakage-safe ML pipeline and a decision report for a non-technical manager | Python, scikit-learn, chi-squared tests | 19.22/20 (code on request) |
+| [Hotel Booking Cancellation Prediction](hotel-cancellation-prediction/) (2026) | End-to-end, leakage-safe ML pipeline and a decision report for a non-technical manager | Python, scikit-learn, chi-squared tests | 19.22/20 |
 | Rice and Image Classification (2025) | Nine classical classifiers compared, then random forest vs MLP vs CNN on 40,000 images | Python, scikit-learn, TensorFlow, Keras Tuner | Full marks (code on request) |
 | [Liveability of Sydney](liveability-of-sydney-sql-postgis/) | Relational and spatial data modelling: schema design, spatial indexing and SQL metrics | PostgreSQL, PostGIS, SQL, Python | High Distinction |
 | [Solar Power Forecasting](solar-power-forecasting/) | Time series forecasting at three time scales | Python, statsmodels, ARIMA, Holt-Winters | High Distinction |
@@ -23,7 +23,7 @@ fionachen0811@gmail.com · [Portfolio site](https://yche9837.github.io/fiona-ds-
 ---
 
 ### 1. Hotel Booking Cancellation Prediction (2026)
-*COMP5310, University of Sydney · pair assignment · coursework repository is private, code available on request*
+*COMP5310, University of Sydney · pair assignment · [code and report](hotel-cancellation-prediction/)*
 
 Predicts which confirmed hotel bookings will be cancelled or end in a no-show, so a revenue manager can follow up with at-risk guests before arrival.
 
